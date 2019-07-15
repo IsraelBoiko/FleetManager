@@ -2,11 +2,11 @@
 
 namespace FleetManager.Model.Validation
 {
-    public class VehicleChassiValidationAttribute : ValidationAttribute
+    public class ChassiUniqueValidationAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            var validationService = (IVehicleChassiValidationService)validationContext.GetService(typeof(IVehicleChassiValidationService));
+            var validationService = (IChassiUniqueValidationService)validationContext.GetService(typeof(IChassiUniqueValidationService));
             var strValue = value as string;
 
             if (validationService.IsValid(strValue))
