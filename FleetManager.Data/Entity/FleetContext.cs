@@ -16,5 +16,10 @@ namespace FleetManager.Data.Entity
         }
 
         public virtual DbSet<Vehicle> Vehicles { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new Map.VehicleMap());
+        }
     }
 }
