@@ -1,9 +1,7 @@
 ﻿using FleetManager.Domain;
 using FleetManager.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.Linq;
 
 namespace FleetManager
 {
@@ -59,7 +57,7 @@ Entrada: ");
                         break;
                     case '4':
                         Console.WriteLine("* Listar veículos *\n");
-                        //Listar();
+                        Listar();
                         break;
                     case '5':
                         Console.WriteLine("* Pesquisar veículo por chassi *\n");
@@ -94,7 +92,14 @@ Entrada: ");
 
         private void Listar()
         {
-            throw new NotImplementedException();
+            var veiculos = Service.All()
+                .OrderBy(v => v.Chassi)
+                .ToArray();
+
+            foreach (var veiculo in veiculos)
+            {
+                Console.Out.ShowVehicle(veiculo);
+            }
         }
 
         private void Deletar()

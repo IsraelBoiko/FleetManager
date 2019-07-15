@@ -1,6 +1,7 @@
 ﻿using FleetManager.Model;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace FleetManager.Domain
 {
@@ -35,5 +36,11 @@ namespace FleetManager.Domain
         /// </summary>
         /// <param name="vehicle">Veículo a ser removido.</param>
         void Remove(Vehicle vehicle);
+
+        /// <summary>
+        /// Lista todos os veículos
+        /// </summary>
+        /// <returns></returns>
+        IQueryable<Vehicle> All();
     }
 }

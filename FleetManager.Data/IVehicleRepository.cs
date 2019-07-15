@@ -1,4 +1,5 @@
-﻿using FleetManager.Model;
+﻿using System.Linq;
+using FleetManager.Model;
 
 namespace FleetManager.Data
 {
@@ -38,5 +39,11 @@ namespace FleetManager.Data
         /// </summary>
         /// <param name="model">O veículo a ser removido.</param>
         void Remove(Vehicle model);
+
+        /// <summary>
+        /// Consulta de veículos.
+        /// </summary>
+        /// <returns>Lista pesquisável de veículos.</returns>
+        IQueryable<Vehicle> All();
     }
 }

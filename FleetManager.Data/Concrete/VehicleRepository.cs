@@ -20,6 +20,8 @@ namespace FleetManager.Data.Concrete
             DbContext.SaveChanges();
         }
 
+        public IQueryable<Vehicle> All() => DbContext.Vehicles;
+
         public bool ChassiExists(string chassi) => DbContext.Vehicles
             .Any(v => v.Chassi == chassi);
 
