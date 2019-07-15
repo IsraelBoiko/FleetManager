@@ -10,4 +10,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FleetManager.Data\FleetManager.Data.csproj" />
+    <ProjectReference Include="..\FleetManager.Domain\FleetManager.Domain.csproj" />
+    <ProjectReference Include="..\FleetManager.Model\FleetManager.Model.csproj" />
+    <ProjectReference Include="..\FleetManager.Resources\FleetManager.Resources.csproj" />
+  </ItemGroup>
+
 </Project>
