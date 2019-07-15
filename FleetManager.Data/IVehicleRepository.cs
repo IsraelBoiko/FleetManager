@@ -26,5 +26,11 @@ namespace FleetManager.Data
         /// <param name="chassi">O chassi a ser procurado.</param>
         /// <returns>O veículo localizado, senão nulo.</returns>
         Vehicle ChassiFind(string chassi);
+
+        /// <summary>
+        /// Atualiza um veículo.
+        /// </summary>
+        /// <param name="model">O veículo a ser atualizado.</param>
+        void Update(Vehicle model);
     }
 }

@@ -25,5 +25,7 @@ namespace FleetManager.Data.Concrete
 
         public Vehicle ChassiFind(string chassi) => DbContext.Vehicles
             .SingleOrDefault(v => v.Chassi == chassi);
+
+        public void Update(Vehicle model) => DbContext.SaveChanges();
     }
 }

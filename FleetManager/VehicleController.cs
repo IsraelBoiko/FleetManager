@@ -51,7 +51,7 @@ Entrada: ");
                         break;
                     case '2':
                         Console.WriteLine("* Editar veículo *\n");
-                        //Editar();
+                        Editar();
                         break;
                     case '3':
                         Console.WriteLine("* Deletar veículo *\n");
@@ -104,6 +104,21 @@ Entrada: ");
 
         private void Editar()
         {
+            var veiculo = Pesquisar();
+
+            // Se não encontrou o veículo
+            if (veiculo == null)
+            {
+                // Finaliza
+                return;
+            }
+
+            Console.WriteLine("A única opção de edição é a cor.");
+
+            Console.Write("Informe a cor: ");
+            veiculo.Color = Console.ReadLine();
+
+            Service.Update(veiculo);
         }
 
         private void Inserir()
