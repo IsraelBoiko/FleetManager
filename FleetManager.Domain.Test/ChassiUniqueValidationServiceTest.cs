@@ -7,17 +7,17 @@ using Moq;
 namespace FleetManager.Domain.Test
 {
     [TestClass]
-    public class VehicleChassiValidationServiceTest
+    public class ChassiUniqueValidationServiceTest
     {
         public Mock<IVehicleRepository> RepositoryMock { get; set; }
 
-        public IVehicleChassiValidationService Service { get; set; }
+        public IChassiUniqueValidationService Service { get; set; }
 
         [TestInitialize]
         public void Setup()
         {
             RepositoryMock = new Mock<IVehicleRepository>();
-            Service = new VehicleChassiValidationService(RepositoryMock.Object);
+            Service = new ChassiUniqueValidationService(RepositoryMock.Object);
         }
 
         [TestMethod]

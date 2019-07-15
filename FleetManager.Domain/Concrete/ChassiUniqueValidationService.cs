@@ -3,9 +3,9 @@ using FleetManager.Model.Validation;
 
 namespace FleetManager.Domain.Concrete
 {
-    public class VehicleChassiValidationService : IVehicleChassiValidationService
+    public class ChassiUniqueValidationService : IChassiUniqueValidationService
     {
-        public VehicleChassiValidationService(IVehicleRepository repository)
+        public ChassiUniqueValidationService(IVehicleRepository repository)
         {
             Repository = repository;
         }

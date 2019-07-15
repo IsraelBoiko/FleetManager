@@ -38,7 +38,7 @@ namespace FleetManager
 
             // Domain
             services.AddSingleton<Domain.IVehicleService, Domain.Concrete.VehicleService>();
-            services.AddSingleton<Model.Validation.IVehicleChassiValidationService, Domain.Concrete.VehicleChassiValidationService>();
+            services.AddSingleton<Model.Validation.IChassiUniqueValidationService, Domain.Concrete.ChassiUniqueValidationService>();
 
             // Data
             services.AddSingleton<Data.IVehicleRepository, Data.Concrete.VehicleRepository>();

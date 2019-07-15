@@ -15,7 +15,7 @@ namespace FleetManager.Domain.Test
     {
         public Mock<IVehicleRepository> RepositoryMock { get; set; }
 
-        public Mock<IVehicleChassiValidationService> ChassiValidationServiceMock { get; set; }
+        public Mock<IChassiUniqueValidationService> ChassiValidationServiceMock { get; set; }
 
         public Mock<IServiceProvider> ServiceProviderMock { get; set; }
 
@@ -34,8 +34,8 @@ namespace FleetManager.Domain.Test
 
         private void Config(bool isValidChassi)
         {
-            ChassiValidationServiceMock = new Mock<IVehicleChassiValidationService>();
-            ServiceProviderMock.Setup(p => p.GetService(typeof(IVehicleChassiValidationService))).Returns(ChassiValidationServiceMock.Object);
+            ChassiValidationServiceMock = new Mock<IChassiUniqueValidationService>();
+            ServiceProviderMock.Setup(p => p.GetService(typeof(IChassiUniqueValidationService))).Returns(ChassiValidationServiceMock.Object);
             ChassiValidationServiceMock.Setup(r => r.IsValid(It.IsAny<string>())).Returns(isValidChassi);
         }
 
