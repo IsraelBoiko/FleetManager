@@ -1,6 +1,8 @@
 ﻿using FleetManager.Domain;
+using FleetManager.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace FleetManager
@@ -19,55 +21,51 @@ namespace FleetManager
         /// </summary>
         public void Show()
         {
-            var validKey = true;
+            var continuar = true;
 
-            while (true)
+            while (continuar)
             {
-                if (validKey)
-                {
-                    Console.WriteLine(@"
+                Console.Write(@"
 Opções:
  1. Inserir veículo
  2. Editar veículo
  3. Deletar veículo
  4. Listar veículos
  5. Pesquisa por chassi
- ESC/0. Sair");
-                }
+ ESC/0 - Sair
 
-                var key = Console.ReadKey(true);
+Entrada: ");
 
-                if (key.Modifiers != 0)
+                var key = ReadValidKey("012345", allowEscape: true);
+
+                switch (key)
                 {
-                    continue;
-                }
-
-                if (key.Key == ConsoleKey.Escape || key.KeyChar == '0')
-                {
-                    break;
-                }
-
-                validKey = true;
-
-                switch (key.KeyChar)
-                {
+                    case '0':
+                    case '\u001b':
+                        // Sair
+                        continuar = false;
+                        break;
                     case '1':
+                        Console.WriteLine("* Inserir veículo *\n");
                         Inserir();
                         break;
                     case '2':
-                        Editar();
+                        Console.WriteLine("* Editar veículo *\n");
+                        //Editar();
                         break;
                     case '3':
-                        Deletar();
+                        Console.WriteLine("* Deletar veículo *\n");
+                        //Deletar();
                         break;
                     case '4':
-                        Listar();
+                        Console.WriteLine("* Listar veículos *\n");
+                        //Listar();
                         break;
                     case '5':
-                        Pesquisar();
+                        Console.WriteLine("* Pesquisar veículo por chassi *\n");
+                        //Pesquisar();
                         break;
                     default:
-                        validKey = false;
                         break;
                 }
             }
@@ -95,7 +93,77 @@ Opções:
 
         private void Inserir()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Informe os dados do veículo:");
+            Console.Write("Informe o chassi: ");
+            var chassi = Console.ReadLine();
+
+            Console.Write("Informe o tipo (1 - Ônibus, 2 - Caminhão): ");
+
+            var option = ReadValidKey("12", showValidKey: false);
+            var tipo = option == '1' ? VehicleType.Bus : VehicleType.Truck;
+
+            if (tipo == VehicleType.Bus)
+            {
+                Console.WriteLine("1 - Ônibus");
+            }
+            else
+            {
+                Console.WriteLine("2 - Caminhão");
+            }
+
+            Console.Write("Informe a cor: ");
+            var cor = Console.ReadLine();
+            var veiculo = new Vehicle(chassi, tipo, cor);
+
+            var resposta = Service.Add(veiculo);
+
+            Console.WriteLine();
+
+            if (!resposta.HasErros())
+            {
+                Console.WriteLine("Veículo adicionado com sucesso!");
+
+                // Finaliza
+                return;
+            }
+
+            Console.WriteLine("O veículo informado possui os seguintes erros:");
+            Console.Error.ShowErrors(resposta);
+
+            Console.WriteLine();
+        }
+
+        private char ReadValidKey(string validKeys, bool showValidKey = true, bool allowEscape = false)
+        {
+            while (true)
+            {
+                var key = Console.ReadKey(true);
+
+                if (key.Modifiers != 0)
+                {
+                    continue;
+                }
+
+                if (allowEscape && key.Key == ConsoleKey.Escape)
+                {
+                    if (showValidKey)
+                    {
+                        Console.WriteLine("ESC"); 
+                    }
+
+                    return key.KeyChar;
+                }
+
+                if (validKeys.Contains(key.KeyChar))
+                {
+                    if (showValidKey)
+                    {
+                        Console.WriteLine(key.KeyChar); 
+                    }
+
+                    return key.KeyChar;
+                }
+            }
         }
     }
 }
