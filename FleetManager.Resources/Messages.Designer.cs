@@ -61,6 +61,15 @@ namespace FleetManager.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O campo {0} deve ter no máximo {1} caracteres..
+        /// </summary>
+        public static string MaxLength {
+            get {
+                return ResourceManager.GetString("MaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O campo {0} é obrigatório..
         /// </summary>
         public static string Required {

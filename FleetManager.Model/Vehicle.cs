@@ -21,6 +21,7 @@ namespace FleetManager.Model
 
         [Required(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = "Required")]
         [Validation.VehicleChassiValidation(ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = "Vehicle_Chassi_Exists")]
+        [MaxLength(100, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = "MaxLength")]
         [Display(ResourceType = typeof(Names), Name = nameof(Vehicle) + "_" + nameof(Chassi))]
         public string Chassi { get; protected set; }
 
@@ -44,6 +45,7 @@ namespace FleetManager.Model
             }
         }
 
+        [MaxLength(100, ErrorMessageResourceType = typeof(Messages), ErrorMessageResourceName = "MaxLength")]
         public string Color { get; set; }
     }
 }
