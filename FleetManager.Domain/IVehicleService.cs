@@ -29,5 +29,11 @@ namespace FleetManager.Domain
         /// <param name="vehicle">Veículo a ser atualizado.</param>
         /// <returns>Lista vazia quando sucesso, senão lista com os resultados de validação.</returns>
         IList<ValidationResult> Update(Vehicle vehicle);
+
+        /// <summary>
+        /// Remove um veículo
+        /// </summary>
+        /// <param name="vehicle">Veículo a ser removido.</param>
+        void Remove(Vehicle vehicle);
     }
 }

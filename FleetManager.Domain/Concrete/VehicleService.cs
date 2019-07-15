@@ -36,6 +36,8 @@ namespace FleetManager.Domain.Concrete
 
         public Vehicle ChassiFind(string chassi) => string.IsNullOrEmpty(chassi) ? null : Repository.ChassiFind(chassi);
 
+        public void Remove(Vehicle vehicle) => Repository.Remove(vehicle);
+
         public IList<ValidationResult> Update(Vehicle model)
         {
             Repository.Update(model);

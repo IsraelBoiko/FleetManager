@@ -55,7 +55,7 @@ Entrada: ");
                         break;
                     case '3':
                         Console.WriteLine("* Deletar veículo *\n");
-                        //Deletar();
+                        Deletar();
                         break;
                     case '4':
                         Console.WriteLine("* Listar veículos *\n");
@@ -99,7 +99,29 @@ Entrada: ");
 
         private void Deletar()
         {
-            throw new NotImplementedException();
+            var veiculo = Pesquisar();
+
+            // Se não encontrou o veículo
+            if (veiculo == null)
+            {
+                // Finaliza
+                return;
+            }
+
+            Console.Write("Tem certeza que deseja deletar esse veículo (S/N)? ");
+
+            var option = ReadValidKey("snSN", allowEscape: true);
+
+            // Se não confirmou
+            if (option != 's' && option != 'S')
+            {
+                // Finaliza
+                return;
+            }
+
+            Service.Remove(veiculo);
+
+            Console.WriteLine("Veículo removido com sucesso!");
         }
 
         private void Editar()

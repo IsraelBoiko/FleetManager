@@ -32,5 +32,11 @@ namespace FleetManager.Data
         /// </summary>
         /// <param name="model">O veículo a ser atualizado.</param>
         void Update(Vehicle model);
+
+        /// <summary>
+        /// Remove um veículo.
+        /// </summary>
+        /// <param name="model">O veículo a ser removido.</param>
+        void Remove(Vehicle model);
     }
 }
