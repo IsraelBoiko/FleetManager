@@ -5,11 +5,16 @@ namespace FleetManager.Data.Entity
 {
     public class FleetContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public FleetContext(DbContextOptions<FleetContext> options)
+            : base(options)
         {
-            optionsBuilder.UseSqlite("Data source=fleet.db");
         }
 
-        public DbSet<Vehicle> Vehicles { get; set; }
+        public FleetContext()
+            : this(new DbContextOptionsBuilder<FleetContext>().UseSqlite("Data source=vehicle.db").Options)
+        {
+        }
+
+        public virtual DbSet<Vehicle> Vehicles { get; set; }
     }
 }
