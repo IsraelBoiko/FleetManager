@@ -20,10 +20,21 @@ namespace FleetManager.Data.Concrete
             DbContext.SaveChanges();
         }
 
+        public IQueryable<Vehicle> All() => DbContext.Vehicles;
+
         public bool ChassiExists(string chassi) => DbContext.Vehicles
             .Any(v => v.Chassi == chassi);
 
         public Vehicle ChassiFind(string chassi) => DbContext.Vehicles
             .SingleOrDefault(v => v.Chassi == chassi);
+
+        public void Remove(Vehicle model)
+        {
+            DbContext.Vehicles.Remove(model);
+
+            DbContext.SaveChanges();
+        }
+
+        public void Update(Vehicle model) => DbContext.SaveChanges();
     }
 }

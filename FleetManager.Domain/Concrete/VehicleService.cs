@@ -3,6 +3,7 @@ using FleetManager.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace FleetManager.Domain.Concrete
 {
@@ -34,11 +35,17 @@ namespace FleetManager.Domain.Concrete
             return validations;
         }
 
+        public IQueryable<Vehicle> All() => Repository.All();
+
         public Vehicle ChassiFind(string chassi) => string.IsNullOrEmpty(chassi) ? null : Repository.ChassiFind(chassi);
 
-        public IList<ValidationResult> Update(Vehicle vehicle)
+        public void Remove(Vehicle vehicle) => Repository.Remove(vehicle);
+
+        public IList<ValidationResult> Update(Vehicle model)
         {
-            throw new NotImplementedException();
+            Repository.Update(model);
+
+            return Array.Empty<ValidationResult>();
         }
     }
 }
