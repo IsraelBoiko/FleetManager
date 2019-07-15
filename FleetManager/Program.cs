@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace FleetManager
 {
@@ -24,13 +23,9 @@ namespace FleetManager
             {
                 dbContext.Database.Migrate();
 
-                if (!dbContext.Vehicles.Any(e => e.Chassi == "ABC"))
-                {
-                    dbContext.Vehicles.Add(new Model.Vehicle("ABC", Model.VehicleType.Bus, "Azul"));
-                    dbContext.SaveChanges();
-                }
+                var controller = scope.ServiceProvider.GetService<VehicleController>();
 
-                var all = dbContext.Vehicles.ToList();
+                controller.Show();
             }
         }
 
@@ -38,7 +33,18 @@ namespace FleetManager
         {
             var baseDirectory = AppContext.BaseDirectory;
 
+            // Database
             services.AddDbContext<Data.Entity.FleetContext>(options => options.UseSqlite($"Data source={Path.Combine(baseDirectory, "fleet.db")}"));
+
+            // Domain
+            services.AddSingleton<Domain.IVehicleService, Domain.Concrete.VehicleService>();
+            services.AddSingleton<Model.Validation.IVehicleChassiValidationService, Domain.Concrete.VehicleChassiValidationService>();
+
+            // Data
+            services.AddSingleton<Data.IVehicleRepository, Data.Concrete.VehicleRepository>();
+
+            // Controller
+            services.AddSingleton<VehicleController>();
         }
     }
 }
