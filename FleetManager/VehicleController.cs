@@ -63,7 +63,7 @@ Entrada: ");
                         break;
                     case '5':
                         Console.WriteLine("* Pesquisar veículo por chassi *\n");
-                        //Pesquisar();
+                        Pesquisar();
                         break;
                     default:
                         break;
@@ -71,9 +71,25 @@ Entrada: ");
             }
         }
 
-        private void Pesquisar()
+        private Vehicle Pesquisar()
         {
-            throw new NotImplementedException();
+            Console.Write("Informe o chassi do veículo: ");
+            var chassi = Console.ReadLine();
+
+            var veiculo = Service.ChassiFind(chassi);
+
+            Console.WriteLine();
+
+            if (veiculo == null)
+            {
+                Console.Error.WriteLine("Veículo não encontrado!");
+
+                return veiculo;
+            }
+
+            Console.Out.ShowVehicle(veiculo);
+
+            return veiculo;
         }
 
         private void Listar()
@@ -88,7 +104,6 @@ Entrada: ");
 
         private void Editar()
         {
-            throw new NotImplementedException();
         }
 
         private void Inserir()
